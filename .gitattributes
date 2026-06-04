@@ -1,27 +1,18 @@
-# Normaliser tout en texte avec fin de ligne LF dans le repo
+# Normaliser toutes les fins de ligne en LF dans le repo
 * text=auto eol=lf
 
-# Scripts et fichiers où LF est obligatoire
-*.sh   text eol=lf
-*.bash text eol=lf
-*.py   text eol=lf
-*.yml  text eol=lf
-*.yaml text eol=lf
-*.json text eol=lf
-*.md   text eol=lf
-*.env* text eol=lf
+# Fichiers texte importants
+*.md     text eol=lf
+*.py     text eol=lf
+*.sh     text eol=lf
+*.env*   text eol=lf
 
-# Fichiers purement binaires (pas de conversion de fins de ligne)
-*.png  binary
-*.jpg  binary
-*.jpeg binary
-*.gif  binary
-*.pdf  binary
-*.zip  binary
-*.exe  binary
-*.dll  binary
+# Scripts Windows (gardent CRLF si vraiment nécessaire)
+*.ps1    text eol=crlf
 
-# Cas Windows spécifiques : garder CRLF si vraiment nécessaire
-*.bat  text eol=crlf
-*.cmd  text eol=crlf
-*.ps1  text eol=crlf
+# Fichiers binaires (pas de conversion)
+*.zip    binary
+
+# Clés et fichiers SSH
+github      text eol=lf
+github.pub  text eol=lf
