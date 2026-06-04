@@ -54,9 +54,9 @@ La présente application vise à industrialiser et fiabiliser la préparation de
 | Pénalité de mauvaise réponse | Aucune | — |
 | Format | Livre ouvert (open book) | Reproduit en mode examen |
 | Domaines pondérés | 8 (DOFD-1 → DOFD-8) | Respectés à l'identique |
-| **Cible d'entraînement** | — | **≥ 90 % en blancs représentatifs** |
+| **Cible de réussite** | — | **Curseur réglable de 65 % à 90 %** (défaut 90 %) |
 
-> **Note d'honnêteté pédagogique.** Le seuil officiel de réussite est de **65 %**. La cible de **90 %** demandée par le commanditaire est conservée comme **objectif d'entraînement** : viser 90 % en conditions d'examen blanc crée une **marge de sécurité** confortable pour franchir le seuil réel sous stress. La plateforme matérialise donc deux jalons : « seuil de passage » (65 %) et « niveau de confiance » (90 %).
+> **Note d'honnêteté pédagogique.** Le seuil officiel de réussite est de **65 %**. La cible demandée par le commanditaire (**90 %**) est un **objectif d'entraînement** : viser plus haut que le seuil crée une **marge de sécurité** pour franchir l'examen réel sous stress. La plateforme expose donc un **curseur de cible de réussite réglable de 65 % à 90 %** — le bas du curseur correspond au seuil officiel, le haut à l'objectif de confiance. Le moteur de préparation, le signal « prêt pour l'examen » et les tableaux de bord se calent sur la valeur choisie.
 
 ### 1.3 Vision produit
 
@@ -130,18 +130,21 @@ Une **plateforme web autoportée**, exécutable hors-ligne, multi-plateforme (Wi
 
 ### 3.1 Référentiel de certification (DOFD v3.4)
 
-Les 8 domaines structurent l'ensemble du contenu et le moteur d'examen. Les libellés ci-dessous sont **représentatifs** ; **les pondérations DOIVENT être renseignées à partir du syllabus officiel** (valeurs ci-dessous **illustratives, à remplacer**) :
+Les 8 domaines structurent l'ensemble du contenu et le moteur d'examen. Les pondérations ci-dessous sont les **valeurs officielles** du blueprint DevOps Institute (document *DevOps Foundation Examination Requirements*, rubrique « Exam Topic Areas and Question Weighting »), exprimées en **nombre maximal de questions par domaine sur 40** (somme = 40, soit 100 %) :
 
-| Code | Domaine (représentatif) | Pondération *(illustrative — à confirmer)* |
-|---|---|---|
-| DOFD-1 | Explorer les concepts DevOps | ~10 % |
-| DOFD-2 | Principes fondamentaux (The Three Ways, théorie des contraintes, organisations apprenantes) | ~15 % |
-| DOFD-3 | Pratiques clés (CALMS, CI/CD, pipeline de déploiement, SRE, observabilité) | ~18 % |
-| DOFD-4 | Cadres métier et techniques (Agile, Lean, ITSM, financement continu) | ~12 % |
-| DOFD-5 | Culture, comportements et modèles opérationnels | ~13 % |
-| DOFD-6 | Automatisation et architecture des chaînes d'outils | ~14 % |
-| DOFD-7 | Mesure, métriques et reporting (métriques DORA) | ~10 % |
-| DOFD-8 | Partage, accompagnement et évolution (ChatOps, Kaizen, entreprise) | ~8 % |
+| Code | Domaine (intitulé officiel) | Questions /40 | Pondération |
+|---|---|---|---|
+| DOFD-1 | Explorer le DevOps | 5 | 12,5 % |
+| DOFD-2 | Principes fondamentaux (les Trois Voies) | 4 | 10,0 % |
+| DOFD-3 | Pratiques clés (CALMS, CI/CD, pipeline, SRE, observabilité) | 7 | 17,5 % |
+| DOFD-4 | Cadres métier et techniques (Agile, Lean, ITSM, SAFe) | 7 | 17,5 % |
+| DOFD-5 | Valeurs DevOps : culture, comportements et modèles opérationnels | 6 | 15,0 % |
+| DOFD-6 | Valeurs DevOps : automatisation et architecture des chaînes d'outils | 5 | 12,5 % |
+| DOFD-7 | Valeurs DevOps : mesure, métriques et reporting (DORA) | 2 | 5,0 % |
+| DOFD-8 | Valeurs DevOps : partage, accompagnement et évolution | 4 | 10,0 % |
+| **Total** | | **40** | **100 %** |
+
+> Source : les valeurs proviennent du document officiel **v3.3** (le seul blueprint chiffré publiquement disponible) ; ces nombres définissent la composition exacte de l'examen et sont selon toute vraisemblance inchangés en v3.4. Le référent pédagogique **CONFIRMERA** sur le syllabus v3.4 détenu par le commanditaire ; toute différence se corrige par simple paramétrage (voir ci-dessous).
 
 > La pondération **DOIT** être stockée en base (table `domain`) et non codée en dur, afin de coller à la version officielle et de supporter d'autres certifications (voir §9).
 
@@ -159,7 +162,9 @@ La progression s'appuie sur une taxonomie cognitive (inspirée de la taxonomie d
 | **K5** | Synthétiser | Concevoir une combinaison, intégrer | Simulations, construction de pipeline |
 | **K6** | Créer | Produire une solution nouvelle | Projet de simulation DevOps complet |
 
-> **Note de cadrage.** L'examen *DevOps Foundation* évalue majoritairement les niveaux **K1–K2** (compréhension/application), avec quelques items K3. Les niveaux **K4–K6 sont des leviers de sur-apprentissage** : ils consolident la maîtrise au-delà de l'examen et soutiennent la cible de 90 %, sans être directement représentatifs du format réel. La plateforme **DOIT** distinguer clairement les activités « représentatives examen » des activités « approfondissement ».
+> **Note de cadrage.** L'examen *DevOps Foundation* évalue majoritairement les niveaux **K1–K2** (compréhension/application), avec quelques items K3. Les niveaux **K4–K6 sont des leviers de sur-apprentissage** : ils consolident la maîtrise au-delà de l'examen et soutiennent l'atteinte d'une cible élevée (jusqu'à 90 %, selon le réglage du curseur), sans être directement représentatifs du format réel. La plateforme **DOIT** distinguer clairement les activités « représentatives examen » des activités « approfondissement ».
+
+> **Note d'implémentation (échelle K1–K7).** La banque livrée encode le niveau cognitif sur une **échelle 1-indexée K1 à K7**, plus fine que la table conceptuelle ci-dessus, afin de graduer le sur-apprentissage : **K1** Se souvenir, **K2** Comprendre, **K3** Appliquer, **K4** Analyser, **K5** Évaluer, **K6** Créer/concevoir, **K7** Synthèse experte (intégration de plusieurs concepts dans un scénario, nettement au-delà du format réel). La correspondance avec la taxonomie conceptuelle est directe (le K0 « exposition » est couvert par les fiches et flashcards). **L'examen réel restant borné à K1–K2**, les niveaux **K3–K7 et les examens « Difficile »/« Très difficile » sont explicitement du sur-apprentissage** ; pour des conditions proches du réel, on privilégie le niveau **Moyen**.
 
 ### 3.3 Sources pédagogiques de référence
 
@@ -209,7 +214,7 @@ Le commanditaire souhaite intégrer un axiome de cadrage propriétaire dit **« 
 | EF-01 | Théorie | Fiches de cours par domaine, navigables hors-ligne | K0–K1 |
 | EF-02 | Flashcards | Recto/verso, intégrées à la révision espacée | K0–K1 |
 | EF-03 | Quiz | Séries courtes par domaine/niveau, correction immédiate | K1–K2 |
-| EF-04 | Examens blancs | Génération dynamique au format officiel (40 Q / 60 min) | K1–K3 |
+| EF-04 | Examens blancs | Génération dynamique au format officiel (40 Q / 60 min), **par niveau de difficulté** (Moyen / Difficile / Très difficile) et **12 examens blancs prédéfinis et reproductibles** classés par niveau, à **recouvrement nul** au sein d'un même niveau (voir EF-04b) | K1–K7 |
 | EF-05 | Études de cas | Mises en situation longues avec questions liées | K3–K4 |
 | EF-06 | Scénarios d'analyse | Arbitrages, priorisation, justification | K4 |
 | EF-07 | Exercices pratiques | Manipulations guidées (pipeline, métriques…) | K2–K5 |
@@ -218,6 +223,11 @@ Le commanditaire souhaite intégrer un axiome de cadrage propriétaire dit **« 
 | EF-10 | Suivi des faiblesses | Identification des domaines/topics fragiles | tous |
 
 Chaque module **DOIT** : enregistrer l'activité de l'utilisateur, alimenter le suivi de progression et fournir des explications après réponse.
+
+**EF-04b — Examens blancs : niveaux de difficulté, examens prédéfinis et anti-recouvrement.**
+- La génération d'examen **DOIT** accepter un **niveau de difficulté** optionnel — **Moyen** (difficultés 2–3), **Difficile** (3–4), **Très difficile** (4–5) — qui biaise la difficulté des questions tirées. Quel que soit le niveau, la **pondération officielle par domaine reste exacte** (repli automatique sur les autres difficultés du domaine si le vivier d'une bande est insuffisant). Un mode **Expert intensif** (priorité aux questions les plus difficiles, tous niveaux) reste disponible.
+- La plateforme **DOIT** proposer **12 examens blancs prédéfinis**, classés par niveau (4 Moyen, 4 Difficile, 4 Très difficile). Chaque examen est **reproductible** : tirage **déterministe** (graine fixe) produisant la même composition à chaque lancement, afin de permettre de refaire un examen et de mesurer sa progression.
+- Au sein d'un même niveau, les examens prédéfinis **DOIVENT** se **partager les questions sans répétition** (distribution « par donne ») : le **recouvrement entre deux examens d'un même niveau doit être nul** tant que le vivier le permet (condition vérifiée : viviers par domaine ≥ 4 × quota). La difficulté **DOIT** rester équilibrée entre les examens d'un même niveau (répartition en alternance des questions de la bande).
 
 ### 4.2 Implémentation des niveaux K0 à K6
 
@@ -244,9 +254,15 @@ Pour **chaque** niveau, la plateforme **DOIT** définir : types d'activités, lo
 - **EF-12 — Révisions ciblées.** Générer automatiquement des sessions concentrées sur les lacunes détectées.
 - **EF-13 — Difficulté adaptative.** Ajuster la difficulté des items en fonction des performances récentes (voir pseudo-code §7.4).
 - **EF-14 — Probabilité de réussite.** Calculer un indicateur de préparation (0–100 %) par domaine et global, pondéré comme l'examen réel.
-- **EF-15 — Seuils de maîtrise.** Matérialiser les deux jalons : « passage » (65 %) et « confiance » (90 %).
+- **EF-15 — Cible de réussite réglable (curseur).** Exposer côté front un **curseur** réglant la cible de réussite de **65 % (seuil officiel) à 90 % (objectif de confiance)**, pas de 1 %, avec repères visuels aux deux bornes. La valeur est **persistée par utilisateur** (défaut 90 %) ; l'administrateur **PEUT** définir une cible par défaut d'équipe. Tous les indicateurs de préparation (probabilité, signal « prêt », tableaux de bord) se calent sur cette valeur. Le curseur **NE DOIT PAS** descendre sous 65 % (le seuil officiel reste le plancher) ni dépasser 90 %.
 - **EF-16 — Tableaux de bord.** Visualiser progression, lacunes, tendance et estimation de préparation.
-- **EF-17 — Auto-amélioration (rétro-observateur).** Le moteur **DOIT** réviser ses estimations à chaque nouvelle donnée (recalcul des scores, ré-ordonnancement de la file de révision) et **DEVRAIT** ajuster la difficulté d'un item en fonction de son taux de réussite réel observé (item trop facile/difficile signalé à l'admin).
+- **EF-17 — Auto-amélioration (rétro-observateur).** Le moteur **DOIT** réviser ses estimations à chaque nouvelle donnée (recalcul des scores, ré-ordonnancement de la file de révision) et **DEVRAIT** ajuster la difficulté d'un item en fonction de son taux de réussite réel observé (item trop facile/difficile signalé à l'admin). **Extension de second ordre (optionnelle, voir EF-17b) :** le moteur entretient une **difficulté latente** par item, mise à jour conjointement avec une **aptitude latente** de l'apprenant (mise à jour mutuelle de type Elo/Rasch léger). La difficulté **éditoriale** (1–5), qui pilote les bandes et le recouvrement nul des examens blancs, **reste inchangée** : seule la difficulté **observée** évolue (reporting et facteur de confiance). Le gain est **amorti** et la difficulté latente **bornée** pour éviter les à-coups.
+
+- **EF-17b — Boucle réflexive et métacognition (cybernétique de second ordre, OPTIONNELLE).** La plateforme **DOIT** pouvoir être **activée/désactivée** (préférence par utilisateur, défaut configurable par variable d'environnement ; désactivée par défaut). Lorsqu'elle est active :
+  - **Invite de confiance.** Avant validation, l'apprenant **PEUT** déclarer sa **confiance** (probabilité de réussite) sur chaque item d'examen blanc et d'entraînement ; le couple (confiance prédite, résultat réel) est journalisé.
+  - **Tableau de bord de calibration.** La plateforme **DOIT** présenter la qualité de calibration : **score de Brier**, **biais signé** (sur/sous-confiance), **erreur de calibration** (ECE), **courbe de fiabilité** par tranches (prédit vs réel), détail **par domaine**, et la **tendance temporelle du score de Brier** (découpage chronologique des prédictions en tranches successives + verdict amélioration / dégradation / stable) — pour montrer si la calibration progresse au fil des sessions.
+  - **Auto-calibration de la préparation.** Le **facteur de confiance** de l'indicateur de préparation **DOIT** intégrer la qualité de calibration : une mauvaise calibration **amortit** la préparation affichée. Cet ajustement **NE DOIT** s'appliquer **qu'au-delà d'un nombre minimal de prédictions** (anti-oscillation), **rester borné par un plancher**, et **NE JAMAIS** abaisser le **seuil officiel de 65 %**. La **préparation brute** (sans calibration) **DOIT** rester affichée à côté de la préparation calibrée.
+  - **Garde-fous.** La boucle réflexive (un régulateur qui règle un régulateur) **DOIT** être amortie et plafonnée pour éviter divergence ou oscillation ; ses paramètres — **gain** (`DOF_ELO_K`), **seuil minimal de prédictions** (`DOF_CALIB_MIN_RECORDS`), **plancher** (`DOF_CALIB_FLOOR`) — sont **centralisés, pilotables par variables d'environnement** (bornes de sûreté appliquées au démarrage) et **documentés dans `.env.example`**.
 
 ### 4.4 Gestion des utilisateurs et des rôles
 
@@ -274,11 +290,11 @@ Pour **chaque** niveau, la plateforme **DOIT** définir : types d'activités, lo
 - **EF-30** — **Hors-ligne (par défaut)** : toutes les fonctions cœur (théorie, quiz, examens, suivi) fonctionnent **sans aucun accès réseau**.
 - **EF-31** — **Connecté (optionnel)** : enrichissement (liens de ressources externes, vérification de mises à jour de contenu). L'absence de réseau **NE DOIT JAMAIS** bloquer l'usage.
 
-### 4.8 Mode « Expert intensif » (cible > 90 %)
+### 4.8 Mode « Expert intensif » (sur-apprentissage, cible réglable jusqu'à 90 %)
 
 - **EF-32** — Sessions chronométrées en conditions d'examen strictes (pas de correction avant la fin).
 - **EF-33** — Sélection priorisée des items les plus difficiles et des domaines faibles.
-- **EF-34** — **Gating** : le mode signale « prêt pour l'examen » uniquement lorsque la probabilité de réussite globale ≥ 90 % **et** aucun domaine < seuil de passage.
+- **EF-34** — **Gating** : le mode signale « prêt pour l'examen » uniquement lorsque la probabilité de réussite globale **≥ cible réglée par le curseur (65–90 %)** **et** qu'aucun domaine n'est sous le seuil officiel de 65 %.
 - **EF-35** — Enchaînement d'examens blancs complets avec analyse comparative inter-sessions.
 - **EF-36** — Routine quotidienne recommandée (objectifs du jour, série/streak).
 
@@ -402,6 +418,7 @@ Exemples d'endpoints (liste non exhaustive — détails et exemples en §7) :
 |---|---|---|
 | POST | `/api/v1/auth/login` | Connexion |
 | GET | `/api/v1/me/progress` | Progression de l'utilisateur |
+| PATCH | `/api/v1/me/preferences` | Met à jour la cible de réussite (curseur 65–90 %) |
 | GET | `/api/v1/domains` | Domaines + pondérations |
 | GET | `/api/v1/questions` | Recherche filtrée de questions |
 | POST | `/api/v1/exams/generate` | Génère un examen (pondéré) |
@@ -496,6 +513,8 @@ CREATE TABLE app_user (
     password_hash   TEXT NOT NULL,
     role            TEXT NOT NULL DEFAULT 'learner' CHECK (role IN ('learner','admin','reviewer')),
     locale          TEXT NOT NULL DEFAULT 'fr',
+    target_score    REAL NOT NULL DEFAULT 0.90       -- cible du curseur (65 %–90 %)
+                    CHECK (target_score BETWEEN 0.65 AND 0.90),
     created_at      TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
@@ -812,16 +831,44 @@ fonction detecter_faiblesses(user, certification):
             creer_recommandation(user, "review_domain", {domaine})
 ```
 
+**f) Signal « prêt pour l'examen » (gating, cible réglée par le curseur)**
+```text
+fonction est_pret(user, certification):
+    cible ← user.target_score                 # 0.65–0.90, valeur du curseur
+    p ← probabilite_reussite(user, certification)
+    aucun_domaine_faible ← tous(maitrise_pondérée(user, d) >= 0.65
+                                pour d dans certification.domaines)
+    retourner (p >= cible) et aucun_domaine_faible
+```
+
 ### 7.5 Workflow utilisateur type
 
 ```
-1. Connexion → Dashboard (préparation globale, jalons 65 % / 90 %)
-2. Le moteur affiche des recommandations (« réviser DOFD-6 »)
-3. L'apprenant suit une session ciblée (quiz adaptatif) → correction + explications
-4. Mise à jour automatique : maîtrise, faiblesses, file de révision espacée
-5. Périodiquement : examen blanc complet (40 Q / 60 min) → score par domaine
-6. Mode Expert intensif jusqu'au signal « prêt » (≥ 90 % et aucun domaine sous le seuil)
+1. Connexion → Dashboard (préparation globale comparée à la cible du curseur)
+2. Réglage éventuel du curseur de cible (65 %–90 %)
+3. Le moteur affiche des recommandations (« réviser DOFD-6 »)
+4. Session ciblée (quiz adaptatif) → correction + explications
+5. Mise à jour automatique : maîtrise, faiblesses, file de révision espacée
+6. Périodiquement : examen blanc complet (40 Q / 60 min) → score par domaine
+7. Mode Expert intensif jusqu'au signal « prêt » (probabilité ≥ cible du curseur, aucun domaine sous 65 %)
 ```
+
+### 7.6 Exemple d'endpoint — réglage de la cible (curseur)
+
+**Requête**
+```http
+PATCH /api/v1/me/preferences
+Content-Type: application/json
+
+{ "target_score": 0.80 }     // 0.65 ≤ valeur ≤ 0.90
+```
+
+**Réponse `200`**
+```json
+{ "target_score": 0.80, "ready_for_exam": false, "current_readiness": 0.72 }
+```
+
+Toute valeur hors de l'intervalle [0.65 ; 0.90] renvoie `422` (validation). Le champ `ready_for_exam` est recalculé selon la fonction `est_pret` (§7.4-f).
 
 ---
 
@@ -829,7 +876,7 @@ fonction detecter_faiblesses(user, certification):
 
 | Écran | Objectif | Éléments clés |
 |---|---|---|
-| **Dashboard** | Vue d'ensemble | Anneau de préparation global, jalons 65 %/90 %, domaines forts/faibles, recommandations, raccourci « examen blanc » |
+| **Dashboard** | Vue d'ensemble | **Curseur de cible (65 %–90 %)**, anneau de préparation global comparé à la cible, domaines forts/faibles, recommandations, raccourci « examen blanc » |
 | **Parcours d'apprentissage** | Progression par domaine et niveau K | Carte des 8 domaines, badges K0–K6, accès aux modules |
 | **Quiz / Entraînement** | Pratique ciblée | Question, options, minuteur optionnel, correction + explication |
 | **Examen blanc** | Conditions réelles | 40 questions, minuteur 60 min, navigation, soumission, écran de résultats détaillés |
@@ -841,6 +888,8 @@ fonction detecter_faiblesses(user, certification):
 | **Import / Export** | Enrichissement | Téléversement JSON/CSV, validation, rapport, export |
 
 Principes UX : interface **en français**, responsive, lisible, navigation clavier, retours immédiats, parcours sans cul-de-sac.
+
+**Composant « curseur de cible de réussite ».** Visible sur le Dashboard (et dans les préférences) : plage **65 %–90 %**, pas de 1 %, repères et étiquettes aux deux bornes (« Seuil officiel » à 65 %, « Confiance » à 90 %), valeur courante affichée en clair, accessible au clavier. Sa modification met immédiatement à jour l'anneau de préparation, le signal « prêt » et les seuils des tableaux de bord (appel `PATCH /api/v1/me/preferences`).
 
 ---
 
@@ -931,8 +980,12 @@ volumes:
 | `DOF_DEBUG` | Mode debug (0/1) | `0` |
 | `DOF_HOST` / `DOF_PORT` | Hôte / port | `127.0.0.1` / `8000` |
 | `DOF_LOCALE` | Langue par défaut | `fr` |
+| `DOF_SECOND_ORDER` | Active par défaut la couche de second ordre (calibration métacognitive, EF-17b) — 0/1 | `0` |
+| `DOF_ELO_K` | Gain de la boucle réflexive (mise à jour mutuelle aptitude ↔ difficulté latente), borné `[0,1]` | `0.08` |
+| `DOF_CALIB_MIN_RECORDS` | Nombre minimal de prédictions avant que la calibration n'influe sur la préparation (anti-oscillation), entier ≥ 1 | `20` |
+| `DOF_CALIB_FLOOR` | Plancher du facteur de calibration (jamais sous le seuil officiel 65 %), borné `[0,1]` | `0.60` |
 
-Un fichier `.env.example` **DOIT** documenter toutes les variables.
+Un fichier `.env.example` **DOIT** documenter toutes les variables (il est fourni avec le livrable et déposé par les installeurs ; sous Linux/macOS, `start.sh` charge automatiquement un `.env` présent à côté).
 
 ### 10.6 Stratégie de sauvegarde SQLite
 
@@ -983,7 +1036,7 @@ Tests prioritaires : **génération d'examen pondérée**, **calcul de probabili
 | L1 | Code source backend (Django/DRF) | Dépôt Git |
 | L2 | Code source frontend (Vue 3) | Dépôt Git |
 | L3 | Schéma + migrations SQLite | Dans le dépôt |
-| L4 | Contenu pédagogique initial + banque de questions | Fixtures JSON |
+| L4 | Contenu pédagogique initial + **banque de 315 questions** (8 sections, K1–K7, difficultés 1–5, types variés) | Fixtures JSON |
 | L5 | Installateurs Windows / Linux | `install.ps1`, `install.sh` |
 | L6 | Déploiement Docker | `Dockerfile`, `docker-compose.yml` |
 | L7 | Scripts de sauvegarde | `backup_sqlite.(sh\|ps1)` |
@@ -999,7 +1052,7 @@ Tests prioritaires : **génération d'examen pondérée**, **calcul de probabili
 | **Lot 0 — Socle** | Squelette projet, modèle de données, migrations, auth/RBAC, CI de base | Application démarrable, base initialisée |
 | **Lot 1 — Contenu & QCM** | Domaines + contenu initial, modules théorie/flashcards/quiz, import/export | Entraînement de base fonctionnel |
 | **Lot 2 — Moteur** | Génération d'examen pondérée, examens blancs, scoring, probabilité, faiblesses, recommandations | Examens blancs + tableau de bord |
-| **Lot 3 — Modes avancés** | Révision espacée, niveaux K3–K6 (cas, scénarios, simulations), mode Expert intensif | Sur-apprentissage et gating 90 % |
+| **Lot 3 — Modes avancés** | Révision espacée, niveaux K3–K7 (cas, scénarios, synthèse), **génération par niveau de difficulté + 12 examens blancs prédéfinis à recouvrement nul**, mode Expert intensif, **curseur de cible (65–90 %)** | Sur-apprentissage et gating sur cible réglable |
 | **Lot 4 — Industrialisation** | Docker, installateurs, sauvegarde, observabilité, CI/CD complète, durcissement | Livraison multi-plateforme |
 | **Recette** | Vérification des critères §13 | PV de recette |
 
@@ -1015,9 +1068,10 @@ La solution est recevable si **toutes** les conditions suivantes sont satisfaite
 |---|---|---|
 | R1 | Couverture des 8 domaines | Contenu présent et publié pour chaque domaine |
 | R2 | Génération d'examen pondérée | Sur 10 générations, écart ≤ 1 question par domaine vs pondération |
+| R2b | Examens par niveau & anti-recouvrement | Génération par niveau (Moyen/Difficile/Très difficile) respectant la pondération exacte ; 12 examens prédéfinis reproductibles ; **recouvrement nul** entre deux examens d'un même niveau (banque ≥ 315 questions, viviers par domaine ≥ 4 × quota) |
 | R3 | Format d'examen conforme | 40 questions, 60 minutes, seuil 65 %, aucune pénalité |
 | R4 | Correction et explications | Chaque question corrigée fournit une explication |
-| R5 | Calcul de préparation | Probabilité globale et jalons 65 %/90 % affichés et cohérents |
+| R5 | Cible réglable & préparation | Le curseur règle la cible de 65 % à 90 % (plancher/plafond respectés, persistance par utilisateur) ; la probabilité globale et le signal « prêt » se calent sur la valeur choisie |
 | R6 | Détection de faiblesses | Recommandations générées à partir de l'historique |
 | R7 | Révision espacée | File « à revoir » alimentée selon l'algorithme |
 | R8 | Fonctionnement hors-ligne | Fonctions cœur opérationnelles sans réseau |
@@ -1035,16 +1089,16 @@ La solution est recevable si **toutes** les conditions suivantes sont satisfaite
 ### 14.1 Hypothèses
 
 - **H1** — Les paramètres d'examen de référence (40 Q, 60 min, 65 %, livre ouvert, sans pénalité, 8 domaines) correspondent au DOFD v3.4 ciblé. **À confirmer** sur le syllabus officiel détenu par le commanditaire.
-- **H2** — Les pondérations exactes des domaines seront fournies par le référent (les valeurs du §3.1 sont illustratives).
+- **H2** — Les pondérations des domaines du §3.1 sont les **valeurs officielles** du blueprint DevOps Institute (document *Examination Requirements*, v3.3) ; le référent **confirme** leur reconduction en v3.4, toute différence étant corrigeable par paramétrage en base.
 - **H3** — L'usage est local/poste ou petit serveur d'équipe (charge faible à modérée).
 
 ### 14.2 Risques projet
 
 | Risque | Impact | Mitigation |
 |---|---|---|
-| Pondérations officielles indisponibles | Examens non représentatifs | Paramétrage en base ; valeurs corrigeables sans redéploiement |
-| Banque de questions trop petite | Répétition, sur-apprentissage par cœur | Volume cible et diversité K-level ; suivi de couverture |
-| Sur-confiance par familiarité avec les items | Faux signal de préparation | Rotation, anti-répétition récente, items inédits en mode examen |
+| Écart entre pondérations v3.3 et v3.4 | Légère sous/sur-représentation d'un domaine | Valeurs officielles renseignées (§3.1), stockées en base et corrigeables sans redéploiement ; confirmation v3.4 par le référent |
+| Banque de questions trop petite | Répétition, sur-apprentissage par cœur | **Banque de 315 questions originales** (K1–K7, types variés), viviers par domaine ≥ 4 × quota ; suivi de couverture |
+| Sur-confiance par familiarité avec les items | Faux signal de préparation | **Recouvrement nul par construction** entre examens d'un même niveau (distribution « par donne ») ; rotation, niveaux de difficulté et items inédits |
 | Décalage Django ↔ « portabilité totale » | Friction d'installation | Docker comme cible sûre ; option B « zéro dépendance » documentée |
 
 ### 14.3 Point d'attention — droits d'auteur (important)
@@ -1075,6 +1129,8 @@ Rappel (§3.5) : dispositif de **marque/engagement** uniquement, **hors référe
 | **The Three Ways** | Flux, Rétroaction, Apprentissage continu (cadre DevOps) |
 | **DORA** | Métriques de performance de livraison (DevOps Research and Assessment) |
 | **K0–K6** | Niveaux cognitifs (de l'exposition à la création) |
+| **Cybernétique de second ordre** | Cybernétique des *systèmes observants* : le système observe sa propre observation. Ici, l'apprenant devient observateur explicite (déclaration de confiance) et l'instrument de mesure se calibre lui-même (difficulté latente des items, facteur de confiance de la préparation — EF-17b) |
+| **Calibration métacognitive / score de Brier** | Adéquation entre la confiance *prédite* par l'apprenant et sa réussite *réelle*. Le score de Brier (0 = parfait) mesure l'erreur quadratique moyenne des prédictions ; le biais signé distingue sur-confiance et sous-confiance, l'ECE résume l'erreur de calibration |
 | **SR / SM-2** | Révision espacée / algorithme de planification des révisions |
 | **RBAC** | Contrôle d'accès basé sur les rôles |
 | **IaC** | Infrastructure as Code |
@@ -1086,6 +1142,8 @@ Rappel (§3.5) : dispositif de **marque/engagement** uniquement, **hors référe
 - Kim, Behr, Spafford — *The Phoenix Project*.
 - Kim, Humble, Debois, Willis — *The DevOps Handbook*.
 - Kniberg — *Scrum et XP depuis les tranchées*.
+- Pask — *Conversation Theory* (cybernétique de second ordre appliquée à l'apprentissage : deux systèmes qui se modélisent mutuellement) — appui conceptuel de la boucle réflexive EF-17b.
+- von Foerster — *Cybernetics of Cybernetics* (cybernétique des systèmes observants), fondement du « second ordre ».
 
 ---
 
