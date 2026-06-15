@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+  taskpane.html — Volet Office du complément "Reprise DEX -> CAST'IN".
+
+  Ce fichier statique est chargé par Word (cf. manifest.xml). Il charge
+  l'API Office.js officielle (CDN Microsoft) et le script taskpane.js qui
+  appelle le service local dex_castin_word_addin_server.py.
+-->
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <title>Reprise DEX vers CAST'IN</title>
+  <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+  <style>
+    body { font-family: "Segoe UI", Arial, sans-serif; font-size: 13px; margin: 12px; }
+    h1 { font-size: 16px; }
+    button { padding: 6px 14px; margin-bottom: 10px; }
+    #status { margin-bottom: 10px; font-style: italic; color: #555; }
+    .field { margin-bottom: 14px; }
+    .field-label { font-weight: bold; }
+    .field-content { white-space: pre-wrap; background: #f3f3f3; padding: 6px; border-radius: 4px; }
+    .points { background: #fff3cd; padding: 8px; border-radius: 4px; }
+    .copy-btn { font-size: 11px; padding: 2px 8px; margin-left: 6px; }
+  </style>
+</head>
+<body>
+  <h1>Reprise DEX → CAST'IN</h1>
+  <p>Le service local doit être démarré : <code>python dex_castin_word_addin_server.py</code></p>
+  <button id="run-button">Analyser ce DEX</button>
+  <div id="status"></div>
+  <div id="result"></div>
+
+  <script type="text/javascript" src="taskpane.js"></script>
+</body>
+</html>
