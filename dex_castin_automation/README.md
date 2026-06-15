@@ -148,6 +148,36 @@ Numéro de solution (format `Sxxxx`, depuis le nom de fichier ou le début du
 document), Auteur (page de garde), Responsable (page 2, ou nom du service à
 défaut).
 
+## Jeu de tests (DEX d'exemple, faux positifs / faux négatifs)
+
+Le dossier `tests/` contient un jeu de DEX `.docx` synthétiques (générés par
+`tests/docx_builder.py`) couvrant des cas nominaux et des cas volontairement
+problématiques, avec un score de réussite par test et par règle métier :
+
+```bash
+cd dex_castin_automation/tests
+python3 run_tests.py            # génère les .docx (si absents) et exécute les vérifications
+python3 run_tests.py --rebuild  # régénère systématiquement les .docx
+```
+
+Le script affiche un rapport console et écrit `tests/RAPPORT_TESTS.md`
+(score global, score par traitement/règle, détail par test).
+
+| Test | Objectif | Type |
+|---|---|---|
+| `01_cas_nominal_complet` | DEX complet, toutes sections présentes, bien structurées | Vrais positifs |
+| `02_sections_manquantes` | Sections absentes → `Non concerné` + signalement | Vrais négatifs |
+| `03_faux_positif_italique_legitime` | Contenu métier légitime en italique/couleur → exclu à tort | **Faux positif connu** |
+| `04_faux_negatif_titre_non_standard` | Section présente mais titre non reconnu → non détectée | **Faux négatif connu** |
+| `05_numerotation_atypique` | Sections présentes mais numérotées très différemment → retrouvées par leur nom | Vrai positif (règle 1) |
+| `06_liens_dap_adu_sections_separees` | Lien DAP et référence ADU dans des sections différentes → agrégés | Vrai positif (liens) |
+| `07_servitudes_absentes_non_concerne` | Absence légitime de servitudes → `Non concerné` correct | Vrai négatif |
+| `08_identification_absente` | Aucune identification présente → 3 signalements | Vrai positif (règle 8) |
+
+Dernier score global mesuré : **50/52 (96 %)** — les 2 seuls écarts
+correspondent aux deux cas **volontairement** faux positif/négatif (tests 03
+et 04), qui matérialisent les limites ci-dessous (et non une régression).
+
 ## Limites connues (à vérifier manuellement)
 
 - La détection des titres se base sur les styles **« Titre N » / « Heading N »**

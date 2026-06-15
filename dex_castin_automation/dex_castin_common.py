@@ -374,7 +374,24 @@ def _normalize_heading(text: str) -> str:
 
 
 def _heading_matches(normalized_heading: str, keywords: list[str]) -> bool:
-    return any(kw in normalized_heading for kw in keywords)
+    """Un mot-clé correspond au titre normalisé :
+    - mot-clé composé de plusieurs mots (ex: "architecture fonctionnelle
+      applicative") : simple inclusion de la phrase ;
+    - mot-clé d'un seul mot (ex: "servitude", "certificat", "log") : un mot
+      du titre doit COMMENCER par ce mot-clé (gère le singulier/pluriel :
+      "servitude" matche "servitudes"), ce qui évite par ailleurs les faux
+      positifs par sous-chaîne (ex: "log" ne matche pas "metrologie", car
+      aucun mot de "metrologie" ne commence par "log")."""
+
+    words = normalized_heading.split()
+    for kw in keywords:
+        kw_words = kw.split()
+        if len(kw_words) == 1:
+            if any(w.startswith(kw) for w in words):
+                return True
+        elif kw in normalized_heading:
+            return True
+    return False
 
 
 def find_section(
@@ -564,7 +581,7 @@ CASTIN_FIELDS = [
         "label": "Log",
         "tab": "DEX",
         "kind": "text",
-        "keywords": ["diagnostic", "log", "trace"],
+        "keywords": ["diagnostic", "diagnostique", "log", "trace"],
         "hint": "~8.2 Diagnostique / LOG / Trace",
         "none_value": "Non concerné",
     },
@@ -694,7 +711,7 @@ CASTIN_FIELDS = [
 # Identification (numéro de solution, auteur, responsable)                    #
 # --------------------------------------------------------------------------- #
 
-_SOLUTION_RE = re.compile(r"\bS\d{4,6}\b")
+_SOLUTION_RE = re.compile(r"(?<![A-Za-z0-9])S\d{4,6}(?!\d)")
 
 
 def extract_identification(items: list, filename: str) -> dict:
