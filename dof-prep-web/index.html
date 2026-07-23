@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f766e">
+<meta name="description" content="Preparation a la certification DevOps Foundation (DOFD v3.4) — application hors-ligne.">
+<title>DOF-PREP — Preparation DevOps Foundation</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="app">
+  <h1>DOF-PREP</h1>
+  <div class="sub">Preparation DevOps Foundation (DOFD v3.4) — hors-ligne</div>
+</header>
+<nav class="tabs" id="tabs"></nav>
+<main id="view"></main>
+<script src="engine.js"></script>
+<script src="store.js"></script>
+<script src="app.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("sw.js").catch(function () { /* hors-ligne : best effort */ });
+  });
+}
+</script>
+</body>
+</html>
